@@ -46,3 +46,20 @@ order-service/
 ├── Dockerfile
 └── docker-compose.yml
 ```
+
+# Запуск тестов
+
+Поднятие тестовой БД
+```bash
+docker-compose up -d postgres-test-db 
+```
+
+Запуск интеграционных тестов (все API эндпоинты)
+```bash
+go test ./tests/integration/... -v -count=1 -timeout 120s
+```
+
+Запуск Unit тестов
+```bash
+go test ./tests/unit/... -v -count=1
+```
