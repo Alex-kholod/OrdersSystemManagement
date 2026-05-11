@@ -55,6 +55,8 @@ func (s *E2ESuite) SetupSuite() {
 	gin.SetMode(gin.TestMode)
 
 	dsn := dsn()
+	fmt.Println("DSN:", dsn)
+
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	})
@@ -98,7 +100,7 @@ func (s *E2ESuite) TearDownSuite() {
 
 func dsn() string {
 	host := getEnv("TEST_DB_HOST", "localhost")
-	port := getEnv("TEST_DB_PORT", "5432")
+	port := getEnv("TEST_DB_PORT", "5434")
 	name := getEnv("TEST_DB_NAME", "orders_db")
 	user := getEnv("TEST_DB_USER", "postgres")
 	pass := getEnv("TEST_DB_PASSWORD", "secret")
