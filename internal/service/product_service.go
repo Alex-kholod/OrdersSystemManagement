@@ -26,7 +26,6 @@ type CreateProductInput struct {
 	Description string
 	Price       float64
 	Stock       int
-	CategoryID  uuid.UUID
 }
 
 type UpdateProductInput struct {
@@ -60,7 +59,6 @@ func (s *ProductService) CreateProduct(ctx context.Context, input CreateProductI
 		Description: input.Description,
 		Price:       input.Price,
 		Stock:       input.Stock,
-		CategoryID:  input.CategoryID,
 	}
 	if err := s.products.Create(ctx, product); err != nil {
 		return nil, fmt.Errorf("create product: %w", err)
@@ -113,7 +111,6 @@ func (s *ProductService) UpdateProduct(ctx context.Context, id uuid.UUID, input 
 	product.Description = input.Description
 	product.Price = input.Price
 	product.Stock = input.Stock
-	product.CategoryID = input.CategoryID
 
 	if err := s.products.Update(ctx, product); err != nil {
 		return nil, fmt.Errorf("update product: %w", err)

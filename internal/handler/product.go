@@ -20,11 +20,10 @@ func NewProductHandler(productSvc *service.ProductService) *ProductHandler {
 }
 
 type createProductRequest struct {
-	Name        string    `json:"name"        binding:"required"`
-	Description string    `json:"description"`
-	Price       float64   `json:"price"       binding:"required,gt=0"`
-	Stock       int       `json:"stock"       binding:"min=0"`
-	CategoryID  uuid.UUID `json:"category_id" binding:"required"`
+	Name        string  `json:"name"        binding:"required"`
+	Description string  `json:"description"`
+	Price       float64 `json:"price"       binding:"required,gt=0"`
+	Stock       int     `json:"stock"       binding:"min=0"`
 }
 
 type updateProductRequest struct {
@@ -158,7 +157,6 @@ func (h *ProductHandler) CreateProduct(c *gin.Context) {
 		Description: req.Description,
 		Price:       req.Price,
 		Stock:       req.Stock,
-		CategoryID:  req.CategoryID,
 	})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "internal server error"})

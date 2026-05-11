@@ -23,15 +23,17 @@ func (c *Category) BeforeCreate(tx *gorm.DB) error {
 }
 
 type Product struct {
-	ID          uuid.UUID `gorm:"type:uuid;primaryKey"        json:"id"`
-	Name        string    `gorm:"not null"                    json:"name"`
+	ID          uuid.UUID `gorm:"type:uuid;primaryKey" json:"id"`
+	Name        string    `gorm:"not null" json:"name"`
 	Description string    `json:"description"`
 	Price       float64   `gorm:"type:decimal(10,2);not null" json:"price"`
-	Stock       int       `gorm:"not null;default:0"          json:"stock"`
-	CategoryID  uuid.UUID `gorm:"type:uuid;not null"          json:"category_id"`
-	Category    *Category `gorm:"foreignKey:CategoryID"       json:"category,omitempty"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
+	Stock       int       `gorm:"not null;default:0" json:"stock"`
+
+	CategoryID *uuid.UUID `gorm:"type:uuid" json:"category_id"`
+	Category   *Category  `gorm:"foreignKey:CategoryID" json:"category,omitempty"`
+
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 func (p *Product) BeforeCreate(tx *gorm.DB) error {
